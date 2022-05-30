@@ -1,0 +1,148 @@
+{
+  "name": "vcwb",
+  "version": "1.0.0",
+  "description": "Visual Composer Website Builder",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Visualcomposer/builder.git"
+  },
+  "license": "GPL-2.0+",
+  "author": "@visualcomposer",
+  "main": "index.php",
+  "scripts": {
+    "build": "webpack --version && webpack --config webpack.config.babel.js --progress",
+    "build-production": "webpack --version && webpack --config webpack.config.production.babel.js",
+    "build-production-silent": "webpack --version && webpack --config webpack.config.production.babel.js --silent",
+    "build-settings": "echo 'nothing';exit 0",
+    "build-settings-production": "echo 'nothing';exit 0",
+    "test": "BABEL_ENV=test BABEL_JEST_STAGE=0 jest --env=jsdom",
+    "watch": "webpack --version && webpack --config webpack.config.babel.js --progress --watch",
+    "watch-settings": "echo 'nothing';exit 0",
+    "lint": "eslint . --ext .ts,.tsx,.js"
+  },
+  "babel": {
+    "plugins": [
+      "@babel/plugin-transform-runtime",
+      "@babel/plugin-proposal-class-properties"
+    ],
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "browserslist": [
+    ">1%",
+    "ios_saf 8",
+    "ie 10",
+    "ie 11"
+  ],
+  "jest": {
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "^raw-loader\\!": "<rootDir>/tests/jest/__mocks__/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|raw)$": "<rootDir>/tests/jest/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy",
+      "^public(.*)$": "<rootDir>/public$1"
+    },
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/devElements/",
+      "__mocks__"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "testRegex": "(/tests/jest/.*)\\.(ts|tsx|jsx?)$",
+    "testEnvironmentOptions": {
+      "url": "http://localhost/"
+    },
+    "transform": {
+      "^.+\\.jsx?$": "./tests/jest/__mocks__/jest.transform.js",
+      ".(ts|tsx)": [
+        "ts-jest"
+      ]
+    },
+    "verbose": true
+  },
+  "resolutions": {
+    "@babel/runtime": "7.16.0",
+    "color-name": "1.1.4",
+    "core-js": "3.19.0",
+    "css-loader": "6.5.0",
+    "eslint": "8.15.0",
+    "less": "4.1.2",
+    "postcss": "8.3.11",
+    "raw-loader": "1.0.0",
+    "postcss-normalize-url": "git+https://github.com/pavelthq/postcss-normalize-url-7.0.2-normalize-url.git#master",
+    "normalize-url": "7.0.2",
+    "react-datepicker": "4.5.0",
+    "ts-jest": "28.0.2",
+    "jest": "28.1.0",
+    "babel-jest": "28.1.0",
+    "jest-environment-jsdom": "28.1.0",
+    "jest-cli": "28.1.0",
+    "vc-cake": "1.1.0",
+    "css-declaration-sorter": "6.1.3"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "1.7.1",
+    "@types/lodash": "4.14.178",
+    "@types/react": "17.0.38",
+    "@wojtekmaj/enzyme-adapter-react-17": "0.6.5",
+    "combokeys": "3.0.1",
+    "compression-webpack-plugin": "9.2.0",
+    "enzyme": "3.11.0",
+    "enzyme-to-json": "3.6.2",
+    "event-emitter": "0.3.5",
+    "form-serialize": "0.7.2",
+    "mobile-detect": "1.4.5",
+    "node-object-hash": "2.3.10",
+    "react-addons-shallow-compare": "15.6.3",
+    "react-color": "2.19.3",
+    "react-custom-scrollbars": "4.2.1",
+    "react-datepicker": "4.5.0",
+    "react-redux": "7.2.6",
+    "react-slick": "0.28.1",
+    "react-sortable-hoc": "1.11.0",
+    "react-textarea-autosize": "8.3.3",
+    "reactcss": "1.2.3",
+    "redux": "4.1.2",
+    "resize-sensor": "^0.0.6",
+    "sticky-sidebar": "^3.3.1",
+    "ts-loader": "9.2.6",
+    "typescript": "4.5.4",
+    "vc-webpack-vendors": "3.1.1",
+    "webfontloader": "1.6.28",
+    "@types/jest": "27.5.1",
+    "ts-jest": "28.0.2",
+    "jest": "28.1.0",
+    "babel-jest": "28.1.0",
+    "jest-cli": "28.1.0",
+    "jest-environment-jsdom": "28.1.0",
+    "@types/react-dom": "17.0.11",
+    "eslint": "8.15.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jest": "26.2.2",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-react": "7.29.4",
+    "eslint-plugin-react-hooks": "4.5.0",
+    "@typescript-eslint/eslint-plugin": "5.25.0",
+    "@typescript-eslint/parser": "5.25.0",
+    "babel-eslint": "10.1.0"
+  },
+  "devDependencies": {
+  },
+  "engines": {
+    "node": ">=14",
+    "npm": ">=5.8"
+  },
+  "_analyzeDependencies": {
+    "duplicate-package-checker-webpack-plugin": "3.0.0",
+    "webpack-bundle-analyzer": "3.1.0"
+  }
+}

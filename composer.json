@@ -1,0 +1,26 @@
+{
+  "autoload": {
+    "psr-4": {
+      "VisualComposer\\": "visualcomposer/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ComposerHooks\\": "tools/php-composer/"
+    }
+  },
+  "scripts": {
+    "post-update-cmd": [
+      "ComposerHooks\\Registry::postUpdateCmd"
+    ],
+    "post-install-cmd": [
+      "ComposerHooks\\Registry::postInstallCmd"
+    ],
+    "post-autoload-dump": [
+      "ComposerHooks\\Registry::postUpdateCmd"
+    ]
+  },
+  "require": {
+    "ext-exif": "*"
+  }
+}

@@ -1,0 +1,38 @@
+#!/bin/bash
+
+### RUN PHP CODE SNIFFER AND ABORT ON ANY WARNING OR ERROR
+
+NOCOLOR='\033[0m'
+YELLOW='\033[0;33m'
+RED='\033[0;31m'
+
+printf "${YELLOW}Running phpcs...${NOCOLOR}\n"
+
+FILES_PHP=$(git diff --name-only --cached --relative | grep '\.php\?$')
+if [ "$FILES_PHP" != "" ]; then
+  for FILE in $FILES_PHP
+  do
+
+    # File has been removed.
+    if [ ! -f "$FILE" ]; then
+      continue;
+    fi
+
+    OUTPUT=`php ci/phpcs.phar --standard=ci/ruleset.xml $FILE`
+    if [ $? -ne 0 ]; then
+      printf "${RED}Code style verification in $FILE failed. Commit aborted!${NOCOLOR}\n"
+      echo "$OUTPUT"
+      exit 1
+    fi
+  done
+fi
+
+### RUN STANDARD
+printf "${YELLOW}Running standard...${NOCOLOR}\n"
+OUTPUT=`git diff --name-only --cached --relative | grep '\.jsx\?$' | xargs npm run standard`
+if [ $? -ne 0 ]
+then
+  printf "${RED}[JS] Code style verification failed. Commit aborted!${NOCOLOR}\n"
+  echo "$OUTPUT"
+  exit 1
+fi

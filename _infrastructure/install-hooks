@@ -1,0 +1,15 @@
+#!/bin/bash
+
+declare -a hooks=("commit-msg" "pre-commit" "pre-push")
+
+for hook in "${hooks[@]}"
+do
+  cp $hook ../.git/hooks/
+
+  if [ $? == 1 ]; then
+    echo "Something went wrong. Failed to install $hook hook"
+    exit 1
+  else
+    echo "Installed $hook hook."
+  fi
+done
